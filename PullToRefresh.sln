@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PullToRefresh", "PullToRefresh.csproj", "{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Debug|iPhone.Build.0 = Debug|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Release|iPhone.ActiveCfg = Release|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Release|iPhone.Build.0 = Release|iPhone
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{DD8A764C-096A-4E54-97EA-C5A4605CD2CD}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PullToRefresh.csproj
+	EndGlobalSection
+EndGlobal
