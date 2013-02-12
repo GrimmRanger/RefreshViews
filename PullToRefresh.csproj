@@ -85,7 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="RefreshViews\" />
+    <Folder Include="FGRefreshViews\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -98,17 +98,17 @@
       <DependentUpon>PullToRefreshViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="DemoTableSource.cs" />
-    <Compile Include="RefreshViews\RefreshScroller\RefreshScrollView.cs" />
-    <Compile Include="RefreshViews\RefreshTable\RefreshTableSource.cs" />
-    <Compile Include="RefreshViews\RefreshTable\RefreshTableView.cs" />
-    <Compile Include="RefreshViews\RefreshView.cs" />
-    <Compile Include="RefreshViews\RefreshScroller\RefreshScrollDelegate.cs" />
+    <Compile Include="FGRefreshViews\FGRefreshScroller\FGRefreshScrollView.cs" />
+    <Compile Include="FGRefreshViews\FGRefreshTable\FGRefreshTableSource.cs" />
+    <Compile Include="FGRefreshViews\FGRefreshTable\FGRefreshTableView.cs" />
+    <Compile Include="FGRefreshViews\FGRefreshView.cs" />
+    <Compile Include="FGRefreshViews\FGRefreshScroller\FGRefreshScrollDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="PullToRefreshViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Content Include="RefreshViews\refreshArrow.png" />
+    <Content Include="FGRefreshViews\refreshArrow.png" />
   </ItemGroup>
 </Project>

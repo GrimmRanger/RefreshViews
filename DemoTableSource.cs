@@ -4,7 +4,7 @@ using MonoTouch.UIKit;
 
 namespace PullToRefresh
 {
-	public class DemoTableSource : RefreshTableSource
+	public class DemoTableSource : FGRefreshTableSource
 	{
 		private string[] _stuff;
 
@@ -40,9 +40,9 @@ namespace PullToRefresh
 			return cell;
 		}
 
-		public override FGUtil.RefreshView RefreshView (MonoTouch.UIKit.UITableView tableView)
+		public override FGUtil.FGRefreshView RefreshView (MonoTouch.UIKit.UITableView tableView)
 		{
-			RefreshView refreshView = new RefreshView(tableView) {
+			FGRefreshView refreshView = new FGRefreshView(tableView) {
 				ActivityIndicatorStyle = UIActivityIndicatorViewStyle.Gray,
 				FontColor = UIColor.LightGray
 			};

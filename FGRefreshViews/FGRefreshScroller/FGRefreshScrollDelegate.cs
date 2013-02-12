@@ -3,11 +3,11 @@ using MonoTouch.UIKit;
 
 namespace FGUtil
 {
-	public abstract class RefreshScrollDelegate : UIScrollViewDelegate
+	public abstract class FGRefreshScrollDelegate : UIScrollViewDelegate
 	{
 		private IRefreshDelegate _scrollDelegate;
 		
-		public RefreshScrollDelegate (IRefreshDelegate scrollDelegate)
+		public FGRefreshScrollDelegate (IRefreshDelegate scrollDelegate)
 		{
 			_scrollDelegate = scrollDelegate;
 		}
@@ -22,7 +22,7 @@ namespace FGUtil
 			_scrollDelegate.BeganDeceleration(scrollView);
 		}
 		
-		public abstract RefreshView RefreshView(UIScrollView scrollView);
+		public abstract FGRefreshView RefreshView(UIScrollView scrollView);
 	}
 	
 	public interface IRefreshDelegate

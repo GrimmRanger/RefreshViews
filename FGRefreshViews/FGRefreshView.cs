@@ -5,20 +5,20 @@ using MonoTouch.CoreGraphics;
 
 namespace FGUtil
 {
-	public enum RefreshViewOrientation
+	public enum FGRefreshViewOrientation
 	{
 		Vertical,
 		Horizontal
 	}
 
-	public enum RefreshViewState
+	public enum FGRefreshViewState
 	{
 		Idle,
 		Active,
 		Refreshing
 	}
 
-	public class RefreshView : UIView
+	public class FGRefreshView : UIView
 	{
 		private const string defaultPullText			=	"Pull to Refresh...";
 		private const string defaultReleaseText			=	"Release to Refresh...";
@@ -36,8 +36,8 @@ namespace FGUtil
 		private UIImageView _arrow;
 		private UIActivityIndicatorView	_activity;
 
-		private RefreshViewOrientation _orientation;
-		public RefreshViewOrientation Orientation
+		private FGRefreshViewOrientation _orientation;
+		public FGRefreshViewOrientation Orientation
 		{
 			get { return _orientation; }
 			set
@@ -49,8 +49,8 @@ namespace FGUtil
 			}
 		}
 		
-		private RefreshViewState _state;
-		public RefreshViewState State {
+		private FGRefreshViewState _state;
+		public FGRefreshViewState State {
 			get { return _state; }
 			set 
 			{
@@ -88,10 +88,10 @@ namespace FGUtil
 		}
 
 		public bool IsRefreshing {
-			get { return _state == RefreshViewState.Refreshing; }
+			get { return _state == FGRefreshViewState.Refreshing; }
 		}
 
-		public RefreshView (UIView view) : base(new RectangleF(0, -RefreshOffset, view.Bounds.Width, RefreshOffset))
+		public FGRefreshView (UIView view) : base(new RectangleF(0, -RefreshOffset, view.Bounds.Width, RefreshOffset))
 		{
 			_superviewDims = view.Frame.Size;
 			Initialize();
@@ -133,7 +133,7 @@ namespace FGUtil
 
 		public void Update ()
 		{
-			if (Orientation == RefreshViewOrientation.Vertical)
+			if (Orientation == FGRefreshViewOrientation.Vertical)
 				UpdateDetail();
 			UpdateIndicator();
 
@@ -145,13 +145,13 @@ namespace FGUtil
 		{
 			switch (_state) 
 			{
-			case RefreshViewState.Active:
+			case FGRefreshViewState.Active:
 				_detail.Text = defaultReleaseText;
 				break;
-			case RefreshViewState.Refreshing:
+			case FGRefreshViewState.Refreshing:
 				_detail.Text = defaultRefreshText;
 				break;
-			case RefreshViewState.Idle:
+			case FGRefreshViewState.Idle:
 			default:
 				_detail.Text = defaultPullText;
 				break;
@@ -165,10 +165,10 @@ namespace FGUtil
 
 			switch (_state) 
 			{
-			case RefreshViewState.Refreshing:
+			case FGRefreshViewState.Refreshing:
 				_activity.StartAnimating();
 				break;
-			case RefreshViewState.Idle:
+			case FGRefreshViewState.Idle:
 			default:
 				_activity.StopAnimating();
 				break;
@@ -177,7 +177,7 @@ namespace FGUtil
 
 		private void AdjustFrame()
 		{
-			if (Orientation == RefreshViewOrientation.Vertical)
+			if (Orientation == FGRefreshViewOrientation.Vertical)
 			{
 				this.Frame = new RectangleF(0, -RefreshOffset, _superviewDims.Width, RefreshOffset);
 			}
@@ -195,7 +195,7 @@ namespace FGUtil
 
 		private void AdjustDetailFrame ()
 		{
-			if (Orientation == RefreshViewOrientation.Vertical)
+			if (Orientation == FGRefreshViewOrientation.Vertical)
 			{
 				if (IsRefreshing) 
 				{
@@ -219,7 +219,7 @@ namespace FGUtil
 
 		private void AdjustIndicatorFrame()
 		{
-			if (Orientation == RefreshViewOrientation.Vertical)
+			if (Orientation == FGRefreshViewOrientation.Vertical)
 			{
 				_indicator.Frame = new RectangleF(_detail.Frame.X - _indicatorDim - 10,
 				                                  (this.Bounds.Height - _indicatorDim) / 2,
@@ -238,9 +238,9 @@ namespace FGUtil
 			UIView.BeginAnimations("Rotate");
 			UIView.SetAnimationDuration(0.4);
 			UIView.SetAnimationCurve(UIViewAnimationCurve.EaseInOut);
-			float rad = Orientation == RefreshViewOrientation.Vertical ?
-				_state == RefreshViewState.Active ? (float)Math.PI : 0 :
-					_state == RefreshViewState.Active ? (float)Math.PI/2 : 3*(float)Math.PI/2;
+			float rad = Orientation == FGRefreshViewOrientation.Vertical ?
+				_state == FGRefreshViewState.Active ? (float)Math.PI : 0 :
+					_state == FGRefreshViewState.Active ? (float)Math.PI/2 : 3*(float)Math.PI/2;
 			_arrow.Transform = CGAffineTransform.MakeRotation(rad);
 			UIView.CommitAnimations();
 		}

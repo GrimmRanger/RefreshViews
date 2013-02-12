@@ -3,11 +3,11 @@ using MonoTouch.UIKit;
 
 namespace FGUtil
 {
-	public abstract class RefreshTableSource : UITableViewSource
+	public abstract class FGRefreshTableSource : UITableViewSource
 	{
 		private IRefreshDelegate _scrollDelegate;
 
-		public RefreshTableSource (IRefreshDelegate scrollDelegate)
+		public FGRefreshTableSource (IRefreshDelegate scrollDelegate)
 		{
 			_scrollDelegate = scrollDelegate;
 		}
@@ -22,6 +22,6 @@ namespace FGUtil
 			_scrollDelegate.BeganDeceleration(scrollView);
 		}
 
-		public abstract RefreshView RefreshView(UITableView tableView);
+		public abstract FGRefreshView RefreshView(UITableView tableView);
 	}
 }

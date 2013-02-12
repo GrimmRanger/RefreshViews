@@ -5,13 +5,13 @@ using MonoTouch.UIKit;
 
 namespace FGUtil
 {
-	[Register("RefreshScrollView")]
-	public partial class RefreshScrollView : UIScrollView, IRefreshDelegate
+	[Register("FGRefreshScrollView")]
+	public partial class FGRefreshScrollView : UIScrollView, IRefreshDelegate
 	{
-		private RefreshView _refreshView;
+		private FGRefreshView _refreshView;
 		
-		public new RefreshScrollDelegate Delegate {
-			get { return (RefreshScrollDelegate)base.Delegate; }
+		public new FGRefreshScrollDelegate Delegate {
+			get { return (FGRefreshScrollDelegate)base.Delegate; }
 			set 
 			{
 				base.Delegate = value;
@@ -37,9 +37,9 @@ namespace FGUtil
 			get { return Delegate != null && _refreshRequested != null; }
 		}
 		
-		public RefreshScrollView (IntPtr handle) : base(handle) {}
-		public RefreshScrollView (RectangleF frame) : base(frame) {}
-		public RefreshScrollView () : base() {}
+		public FGRefreshScrollView (IntPtr handle) : base(handle) {}
+		public FGRefreshScrollView (RectangleF frame) : base(frame) {}
+		public FGRefreshScrollView () : base() {}
 		
 		private void ConfigRefreshView ()
 		{
@@ -59,7 +59,7 @@ namespace FGUtil
 		
 		private void RefreshInitiated()
 		{
-			_refreshView.State = RefreshViewState.Refreshing;
+			_refreshView.State = FGRefreshViewState.Refreshing;
 			OnRefreshRequested();
 			this.SetContentOffset(this.ContentOffset, true);
 			ConductRefreshTransition();
@@ -67,7 +67,7 @@ namespace FGUtil
 		
 		public void RefreshConcluded ()
 		{
-			_refreshView.State = RefreshViewState.Idle;
+			_refreshView.State = FGRefreshViewState.Idle;
 			ConductRefreshTransition();
 		}
 		
@@ -76,8 +76,8 @@ namespace FGUtil
 			UIView.BeginAnimations("Scroll");
 			UIView.SetAnimationDuration(_refreshView.IsRefreshing ? 0.4 : 0.2);
 			UIView.SetAnimationCurve(UIViewAnimationCurve.EaseInOut);
-			float newOffset = _refreshView.IsRefreshing ? RefreshView.RefreshOffset : 0;
-			this.ContentInset = _refreshView.Orientation == RefreshViewOrientation.Vertical ?
+			float newOffset = _refreshView.IsRefreshing ? FGRefreshView.RefreshOffset : 0;
+			this.ContentInset = _refreshView.Orientation == FGRefreshViewOrientation.Vertical ?
 				new UIEdgeInsets(newOffset, 0, 0, 0) :
 					new UIEdgeInsets(0, newOffset, 0, 0);
 			UIView.CommitAnimations();
@@ -98,22 +98,22 @@ namespace FGUtil
 		{
 			if (RefreshEnabled && !_refreshView.IsRefreshing) 
 			{
-				float offset = _refreshView.Orientation == RefreshViewOrientation.Vertical ? 
+				float offset = _refreshView.Orientation == FGRefreshViewOrientation.Vertical ? 
 					scrollView.ContentOffset.Y : scrollView.ContentOffset.X;
 				
-				if (_refreshView.State != RefreshViewState.Idle && offset > -RefreshView.RefreshOffset)
-					_refreshView.State = RefreshViewState.Idle;
-				if (_refreshView.State != RefreshViewState.Active && offset < -RefreshView.RefreshOffset)
-					_refreshView.State = RefreshViewState.Active;
+				if (_refreshView.State != FGRefreshViewState.Idle && offset > -FGRefreshView.RefreshOffset)
+					_refreshView.State = FGRefreshViewState.Idle;
+				if (_refreshView.State != FGRefreshViewState.Active && offset < -FGRefreshView.RefreshOffset)
+					_refreshView.State = FGRefreshViewState.Active;
 			}
 		}
 		
 		public void BeganDeceleration(UIScrollView scrollView)
 		{
-			float offset = _refreshView.Orientation == RefreshViewOrientation.Vertical ? 
+			float offset = _refreshView.Orientation == FGRefreshViewOrientation.Vertical ? 
 				scrollView.ContentOffset.Y : scrollView.ContentOffset.X;
 
-			if (RefreshEnabled && !_refreshView.IsRefreshing && offset < -RefreshView.RefreshOffset)
+			if (RefreshEnabled && !_refreshView.IsRefreshing && offset < -FGRefreshView.RefreshOffset)
 				RefreshInitiated();
 		}
 #endregion

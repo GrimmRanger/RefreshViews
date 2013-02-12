@@ -10,7 +10,7 @@ namespace PullToRefresh
 	public partial class PullToRefreshViewController : UIViewController
 	{
 //		RefreshTableView _refreshTable;
-		RefreshScrollView _refreshScroll;
+		FGRefreshScrollView _refreshScroll;
 
 		public PullToRefreshViewController () : base ("PullToRefreshViewController", null)
 		{
@@ -32,7 +32,7 @@ namespace PullToRefresh
 			UIView view = new UIView(new RectangleF(0, 40, this.View.Bounds.Width, 100));
 			view.BackgroundColor = UIColor.Red;
 
-			_refreshScroll = new RefreshScrollView(view.Bounds);
+			_refreshScroll = new FGRefreshScrollView(view.Bounds);
 			_refreshScroll.RefreshRequested += delegate(object sender, EventArgs e) {
 				Console.WriteLine("Refresh Requested");
 				NSTimer.CreateScheduledTimer(new TimeSpan(0, 0, 2),
@@ -44,18 +44,18 @@ namespace PullToRefresh
 			this.View.AddSubview(view);
 		}
 
-		private class DemoScrollDelegate : RefreshScrollDelegate
+		private class DemoScrollDelegate : FGRefreshScrollDelegate
 		{
 			public DemoScrollDelegate(IRefreshDelegate refreshDelegate) : base(refreshDelegate)
 			{
 			}
 
-			public override FGUtil.RefreshView RefreshView (UIScrollView scrollView)
+			public override FGUtil.FGRefreshView RefreshView (UIScrollView scrollView)
 			{
-				RefreshView refreshView = new RefreshView(scrollView) {
+				FGRefreshView refreshView = new FGRefreshView(scrollView) {
 					ActivityIndicatorStyle = UIActivityIndicatorViewStyle.Gray,
 					FontColor = UIColor.LightGray,
-					Orientation = RefreshViewOrientation.Horizontal
+					Orientation = FGRefreshViewOrientation.Horizontal
 				};
 				return refreshView;
 			}

@@ -5,13 +5,13 @@ using System.Drawing;
 
 namespace FGUtil
 {
-	[Register("RefreshTableView")]
-	public partial class RefreshTableView : UITableView, IRefreshDelegate
+	[Register("FGRefreshTableView")]
+	public partial class FGRefreshTableView : UITableView, IRefreshDelegate
 	{
-		private RefreshView _refreshView;
+		private FGRefreshView _refreshView;
 
-		public new RefreshTableSource Source {
-			get { return (RefreshTableSource)base.Source; }
+		public new FGRefreshTableSource Source {
+			get { return (FGRefreshTableSource)base.Source; }
 			set 
 			{
 				base.Source = value;
@@ -37,9 +37,9 @@ namespace FGUtil
 			get { return Source != null && _refreshRequested != null; }
 		}
 
-		public RefreshTableView (IntPtr handle) : base(handle) {}
-		public RefreshTableView (RectangleF frame) : base(frame) {}
-		public RefreshTableView () : base() {}
+		public FGRefreshTableView (IntPtr handle) : base(handle) {}
+		public FGRefreshTableView (RectangleF frame) : base(frame) {}
+		public FGRefreshTableView () : base() {}
 
 		private void ConfigRefreshView ()
 		{
@@ -59,7 +59,7 @@ namespace FGUtil
 
 		private void RefreshInitiated()
 		{
-			_refreshView.State = RefreshViewState.Refreshing;
+			_refreshView.State = FGRefreshViewState.Refreshing;
 			OnRefreshRequested();
 			this.SetContentOffset(this.ContentOffset, true);
 			ConductRefreshTransition();
@@ -67,7 +67,7 @@ namespace FGUtil
 
 		public void RefreshConcluded ()
 		{
-			_refreshView.State = RefreshViewState.Idle;
+			_refreshView.State = FGRefreshViewState.Idle;
 			ConductRefreshTransition();
 		}
 
@@ -97,10 +97,10 @@ namespace FGUtil
 			{
 				float offset = scrollView.ContentOffset.Y;
 
-				if (_refreshView.State != RefreshViewState.Idle && offset > -_refreshView.Frame.Height)
-					_refreshView.State = RefreshViewState.Idle;
-				if (_refreshView.State != RefreshViewState.Active && offset < -_refreshView.Frame.Height)
-					_refreshView.State = RefreshViewState.Active;
+				if (_refreshView.State != FGRefreshViewState.Idle && offset > -_refreshView.Frame.Height)
+					_refreshView.State = FGRefreshViewState.Idle;
+				if (_refreshView.State != FGRefreshViewState.Active && offset < -_refreshView.Frame.Height)
+					_refreshView.State = FGRefreshViewState.Active;
 			}
 		}
 
