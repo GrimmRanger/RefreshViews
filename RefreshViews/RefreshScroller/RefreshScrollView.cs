@@ -59,7 +59,7 @@ namespace FGUtil
 		
 		private void RefreshInitiated()
 		{
-			_refreshView.State = RefreshView.RefreshState.Refreshing;
+			_refreshView.State = RefreshViewState.Refreshing;
 			OnRefreshRequested();
 			this.SetContentOffset(this.ContentOffset, true);
 			ConductRefreshTransition();
@@ -67,7 +67,7 @@ namespace FGUtil
 		
 		public void RefreshConcluded ()
 		{
-			_refreshView.State = RefreshView.RefreshState.Idle;
+			_refreshView.State = RefreshViewState.Idle;
 			ConductRefreshTransition();
 		}
 		
@@ -76,7 +76,10 @@ namespace FGUtil
 			UIView.BeginAnimations("Scroll");
 			UIView.SetAnimationDuration(_refreshView.IsRefreshing ? 0.4 : 0.2);
 			UIView.SetAnimationCurve(UIViewAnimationCurve.EaseInOut);
-			this.ContentInset = new UIEdgeInsets(_refreshView.IsRefreshing ? _refreshView.Frame.Height : 0, 0, 0, 0);
+			float newOffset = _refreshView.IsRefreshing ? RefreshView.RefreshOffset : 0;
+			this.ContentInset = _refreshView.Orientation == RefreshViewOrientation.Vertical ?
+				new UIEdgeInsets(newOffset, 0, 0, 0) :
+					new UIEdgeInsets(0, newOffset, 0, 0);
 			UIView.CommitAnimations();
 			
 			this.ScrollEnabled = !_refreshView.IsRefreshing;
@@ -95,18 +98,22 @@ namespace FGUtil
 		{
 			if (RefreshEnabled && !_refreshView.IsRefreshing) 
 			{
-				float offset = scrollView.ContentOffset.Y;
+				float offset = _refreshView.Orientation == RefreshViewOrientation.Vertical ? 
+					scrollView.ContentOffset.Y : scrollView.ContentOffset.X;
 				
-				if (_refreshView.State != RefreshView.RefreshState.Idle && offset > -_refreshView.Frame.Height)
-					_refreshView.State = RefreshView.RefreshState.Idle;
-				if (_refreshView.State != RefreshView.RefreshState.Active && offset < -_refreshView.Frame.Height)
-					_refreshView.State = RefreshView.RefreshState.Active;
+				if (_refreshView.State != RefreshViewState.Idle && offset > -RefreshView.RefreshOffset)
+					_refreshView.State = RefreshViewState.Idle;
+				if (_refreshView.State != RefreshViewState.Active && offset < -RefreshView.RefreshOffset)
+					_refreshView.State = RefreshViewState.Active;
 			}
 		}
 		
 		public void BeganDeceleration(UIScrollView scrollView)
 		{
-			if (RefreshEnabled && !_refreshView.IsRefreshing && scrollView.ContentOffset.Y < -_refreshView.Frame.Height)
+			float offset = _refreshView.Orientation == RefreshViewOrientation.Vertical ? 
+				scrollView.ContentOffset.Y : scrollView.ContentOffset.X;
+
+			if (RefreshEnabled && !_refreshView.IsRefreshing && offset < -RefreshView.RefreshOffset)
 				RefreshInitiated();
 		}
 #endregion

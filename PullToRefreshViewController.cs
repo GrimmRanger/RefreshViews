@@ -29,15 +29,19 @@ namespace PullToRefresh
 //			_refreshTable.Source = new DemoTableSource(_refreshTable);
 //			this.View.AddSubview(_refreshTable);
 
-			_refreshScroll = new RefreshScrollView(this.View.Bounds);
+			UIView view = new UIView(new RectangleF(0, 40, this.View.Bounds.Width, 100));
+			view.BackgroundColor = UIColor.Red;
+
+			_refreshScroll = new RefreshScrollView(view.Bounds);
 			_refreshScroll.RefreshRequested += delegate(object sender, EventArgs e) {
 				Console.WriteLine("Refresh Requested");
 				NSTimer.CreateScheduledTimer(new TimeSpan(0, 0, 2),
 				                             delegate { _refreshScroll.RefreshConcluded(); });
 			};
 			_refreshScroll.Delegate = new DemoScrollDelegate(_refreshScroll);
-			_refreshScroll.ContentSize = new SizeF(this.View.Bounds.Width, this.View.Bounds.Height + 1);
-			this.View.AddSubview(_refreshScroll);
+			_refreshScroll.ContentSize = new SizeF(view.Bounds.Width + 1, view.Bounds.Height);
+			view.AddSubview(_refreshScroll);
+			this.View.AddSubview(view);
 		}
 
 		private class DemoScrollDelegate : RefreshScrollDelegate
@@ -50,7 +54,8 @@ namespace PullToRefresh
 			{
 				RefreshView refreshView = new RefreshView(scrollView) {
 					ActivityIndicatorStyle = UIActivityIndicatorViewStyle.Gray,
-					FontColor = UIColor.LightGray
+					FontColor = UIColor.LightGray,
+					Orientation = RefreshViewOrientation.Horizontal
 				};
 				return refreshView;
 			}

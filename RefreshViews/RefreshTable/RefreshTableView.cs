@@ -59,7 +59,7 @@ namespace FGUtil
 
 		private void RefreshInitiated()
 		{
-			_refreshView.State = RefreshView.RefreshState.Refreshing;
+			_refreshView.State = RefreshViewState.Refreshing;
 			OnRefreshRequested();
 			this.SetContentOffset(this.ContentOffset, true);
 			ConductRefreshTransition();
@@ -67,7 +67,7 @@ namespace FGUtil
 
 		public void RefreshConcluded ()
 		{
-			_refreshView.State = RefreshView.RefreshState.Idle;
+			_refreshView.State = RefreshViewState.Idle;
 			ConductRefreshTransition();
 		}
 
@@ -97,10 +97,10 @@ namespace FGUtil
 			{
 				float offset = scrollView.ContentOffset.Y;
 
-				if (_refreshView.State != RefreshView.RefreshState.Idle && offset > -_refreshView.Frame.Height)
-					_refreshView.State = RefreshView.RefreshState.Idle;
-				if (_refreshView.State != RefreshView.RefreshState.Active && offset < -_refreshView.Frame.Height)
-					_refreshView.State = RefreshView.RefreshState.Active;
+				if (_refreshView.State != RefreshViewState.Idle && offset > -_refreshView.Frame.Height)
+					_refreshView.State = RefreshViewState.Idle;
+				if (_refreshView.State != RefreshViewState.Active && offset < -_refreshView.Frame.Height)
+					_refreshView.State = RefreshViewState.Active;
 			}
 		}
 
