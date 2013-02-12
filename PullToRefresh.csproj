@@ -102,6 +102,7 @@
     <Compile Include="RefreshViews\RefreshTable\RefreshTableSource.cs" />
     <Compile Include="RefreshViews\RefreshTable\RefreshTableView.cs" />
     <Compile Include="RefreshViews\RefreshView.cs" />
+    <Compile Include="RefreshViews\RefreshScroller\RefreshScrollDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="PullToRefreshViewController.xib" />

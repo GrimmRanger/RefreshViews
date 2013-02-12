@@ -7,7 +7,7 @@ using MonoTouch.CoreAnimation;
 namespace FGUtil
 {
 	[Register("RefreshTableView")]
-	public partial class RefreshTableView : UITableView, IScrollDelegate
+	public partial class RefreshTableView : UITableView, IRefreshDelegate
 	{
 		private RefreshView _refreshView;
 
@@ -113,4 +113,3 @@ namespace FGUtil
 #endregion
 	}
 }
-

@@ -8,7 +8,7 @@ namespace PullToRefresh
 	{
 		private string[] _stuff;
 
-		public DemoTableSource (IScrollDelegate scrollDelegate) : base(scrollDelegate)
+		public DemoTableSource (IRefreshDelegate scrollDelegate) : base(scrollDelegate)
 		{
 			_stuff = new string[] { "this", "that", "the other" };
 		}
