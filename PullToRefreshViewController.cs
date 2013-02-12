@@ -9,7 +9,7 @@ namespace PullToRefresh
 {
 	public partial class PullToRefreshViewController : UIViewController
 	{
-		RefreshTableView _refreshTable;
+//		RefreshTableView _refreshTable;
 		RefreshScrollView _refreshScroll;
 
 		public PullToRefreshViewController () : base ("PullToRefreshViewController", null)

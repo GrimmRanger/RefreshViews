@@ -2,7 +2,6 @@ using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Drawing;
-using MonoTouch.CoreAnimation;
 
 namespace FGUtil
 {
